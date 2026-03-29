@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: CI/CD Pipeline
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,3 +15,9 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t minha-app .
+
+      - name: Rodar container
+        run: docker run -d -p 5000:5000 minha-app
+
+      - name: Verificar container
+        run: docker ps
